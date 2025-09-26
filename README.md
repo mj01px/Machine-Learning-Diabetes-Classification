@@ -5,7 +5,7 @@ The goal is to explore preprocessing techniques, model training, and performance
 
 ## Contents
 - **Preprocessing**: data normalization with `StandardScaler`.
-- **Models**: Support Vector Machine (SVM), Decision Trees, and Logistic Regression.
+- **Models**: Support Vector Machine (SVM), and Logistic Regression.
 - **Validation**: comparison between:
   - `KFold` with **10 splits**
   - `StratifiedKFold` with **3 splits**
