@@ -75,7 +75,8 @@ matplotlib
 - Recall da classe **diabético** é destaque (importância clínica).  
 
 ### Matriz de Confusão  
-![matriz de confusao.png](matriz%20de%20confusao.png)  
+![matriz de confusao](matriz%20de%20confusao.png)
+  
 
 ### Curvas ROC e Precision-Recall  
 Comparação entre **SVM Linear (KFold=10)** e **SVM RBF (StratifiedKFold=3)**:  
