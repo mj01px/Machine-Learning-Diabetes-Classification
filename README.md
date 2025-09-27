@@ -1,60 +1,101 @@
 # 🩺 Pima Indians Diabetes — Machine Learning Notebook
 
-(1)Descrição do Projeto
-    Este projeto desenvolve um modelo de Machine Learning para prever a presença de diabetes em pacientes, utilizando o dataset "Pima Indians Diabetes Database". O principal classificador explorado é o Support Vector Machine (SVM).
+## 📌 Descrição do Projeto  
+Este projeto desenvolve um modelo de Machine Learning para prever a presença de diabetes em pacientes, utilizando o dataset **Pima Indians Diabetes Database**.  
 
-    O foco central do estudo é a otimização de hiperparâmetros através do GridSearchCV, com uma análise comparativa rigorosa entre duas estratégias de validação cruzada: KFold(10) e StratifiedKFold(3). O objetivo é demonstrar a importância da estratificação em datasets com classes desbalanceadas para obter uma estimativa de performance mais confiável e, consequentemente, um modelo final mais robusto.
+O classificador principal é o **Support Vector Machine (SVM)**, com foco em:  
+- **Otimização de hiperparâmetros via GridSearchCV**  
+- **Comparação entre KFold (10) e StratifiedKFold (3)**  
 
-(2)Metodologia
-    O projeto foi estruturado seguindo as seguintes etapas:
+O objetivo é mostrar como a escolha da validação cruzada pode impactar o desempenho, especialmente em datasets **desbalanceados**, garantindo estimativas mais confiáveis e um modelo final mais robusto.  
 
-        ✔️ Carga e Divisão dos Dados: O dataset foi carregado e dividido em conjuntos de treino (80%) e teste (20%). A divisão foi feita de forma estratificada para garantir que a proporção de pacientes diabéticos e não diabéticos fosse mantida em ambos os conjuntos.
-        
-        ✔️ Pipeline de Pré-processamento: Foi construído um Pipeline para automatizar o tratamento dos dados, incluindo:
-        StandardScaler: Para padronizar as features, garantindo que todas tenham a mesma escala.
-        
-        ✔️ Otimização e Comparação com GridSearchCV: O GridSearchCV foi utilizado para testar exaustivamente diferentes combinações de hiperparâmetros do SVM (kernel, C, gamma). Este processo foi executado duas vezes para comparar as seguintes estratégias de validação:
-        KFold com 10 splits: Uma validação cruzada padrão.
-        StratifiedKFold com 3 splits: Uma validação que preserva a proporção das classes em cada fold.
-        
-        ✔️ Treinamento e Avaliação do Modelo Final: Após a otimização, o melhor conjunto de hiperparâmetros (kernel='rbf', C=10, gamma=0.01) foi usado para treinar um modelo final com todos os dados de treino. O desempenho deste modelo foi então avaliado no conjunto de teste, utilizando métricas como acurácia, matriz de confusão e o classification_report (com precisão, recall e F1-score).
-        
-        ✔️ Visualização da Fronteira de Decisão: Para uma análise mais intuitiva, foi gerado um gráfico que plota a fronteira de decisão do modelo SVM, mostrando como ele separa os pacientes com base nas duas features mais relevantes (Glucose e BMI).
+---
 
-(3)Pré-requisitos e Instalação
-    A grande vantagem de usar o Google Colab é que ele já vem com o ambiente pronto, simplificando muito a configuração.
+## ⚙️ Metodologia  
 
-    Pré-requisitos:
+✔️ **Carga e Divisão dos Dados**  
+- Dataset dividido em **80% treino / 20% teste**, de forma estratificada.  
 
-        Google Colab;
-        python.
+✔️ **Pipeline de Pré-processamento**  
+- Imputação de valores ausentes com `SimpleImputer` (mediana).  
+- Padronização das features com `StandardScaler`.  
 
-    Bibliotecas:
-            pandas;
-            scikit-learn;
-            Numpy;
-            Matplotlib.
+✔️ **Otimização com GridSearchCV**  
+- Busca exaustiva pelos melhores hiperparâmetros (kernel, C, gamma).  
+- Comparação entre:  
+  - **KFold (10)** → validação padrão  
+  - **StratifiedKFold (3)** → mantém proporção de classes em cada fold  
 
-(4)Resultados e Análise
-    A etapa de GridSearchCV revelou que a melhor combinação de hiperparâmetros foi {'clf__kernel': 'rbf', 'clf__C': 10, 'clf__gamma': 0.01} para ambas as estratégias de validação cruzada.
+✔️ **Treinamento e Avaliação**  
+- Melhor configuração encontrada:  
+  ```python
+  {'clf__kernel': 'rbf', 'clf__C': 10, 'clf__gamma': 0.01}
+  ```  
+- Avaliação com métricas como **acurácia, matriz de confusão, precisão, recall e F1-score**.  
 
-    O modelo final, treinado com estes parâmetros, alcançou uma acurácia de aproximadamente 75.32% no conjunto de teste. A análise detalhada do classification_report mostra que o modelo possui um bom equilíbrio entre precisão e recall, sendo o recall para a classe "diabético" uma métrica de especial importância clínica, pois indica a capacidade do modelo de identificar corretamente os pacientes que de fato possuem a doença.
+✔️ **Visualização**  
+- Fronteira de decisão gerada a partir de duas features relevantes (**Glucose** e **BMI**), destacando os vetores de suporte.  
 
-    Matriz de Confusão
-    A matriz de confusão ilustra a distribuição de acertos e erros do modelo no conjunto de teste.
+---
 
-![matriz de confusao.png](matriz%20de%20confusao.png)
+## 🔧 Pré-requisitos  
 
-    Decisão do SVM
-    o kernel RBF cria uma fronteira de decisão não-linear para separar as classes, utilizando as features Glucose e BMI. Os pontos circulados representam os vetores de suporte, que são os dados mais influentes para a definição do modelo.
+📍 Recomendado rodar no **Google Colab** (ambiente já pronto).  
 
+### Instalação Local  
+```bash
+# Clonar este repositório
+git clone https://github.com/seu-usuario/pima-diabetes-ml.git
+cd pima-diabetes-ml
 
-(6)Ferramentas Utilizadas
-        Linguagem: 
-        Python 3
+# Criar ambiente virtual (opcional)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 
-    Bibliotecas:
-        Pandas;
-        Numpy;
-        Scikit-learn;
-        Matplotlib.
+# Instalar dependências
+pip install -r requirements.txt
+```
+
+### Requirements  
+```
+pandas
+numpy
+scikit-learn
+matplotlib
+```
+
+---
+
+## 📊 Resultados  
+
+- Melhor configuração: `rbf, C=10, gamma=0.01`  
+- Acurácia no teste: **~75,32%**  
+- Bom equilíbrio entre **precisão e recall**  
+- Recall da classe **diabético** é destaque (importância clínica).  
+
+### Matriz de Confusão  
+![matriz de confusao.png](matriz%20de%20confusao.png)  
+
+### Curvas ROC e Precision-Recall  
+Comparação entre **SVM Linear (KFold=10)** e **SVM RBF (StratifiedKFold=3)**:  
+
+- **ROC AUC:** 0.83 (ambos)  
+- **AP (Precision-Recall):** RBF levemente superior (0.72 vs 0.71)  
+
+---
+
+## 🛠️ Ferramentas Utilizadas  
+- **Linguagem:** Python 3  
+- **Bibliotecas:** pandas, numpy, scikit-learn, matplotlib  
+
+---
+
+## 🚀 Como Rodar  
+1. Clone o repositório  
+2. Instale as dependências  
+3. Execute o notebook no **Jupyter** ou **Google Colab**  
+
+---
+
+📌 Projeto feito para estudo de **Machine Learning aplicado a dados biomédicos**.  
