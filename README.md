@@ -75,7 +75,7 @@ matplotlib
 - Recall da classe **diabético** é destaque (importância clínica).  
 
 ### Matriz de Confusão  
-![matriz de confusao](matriz%20de%20confusao.png)
+![matriz de confusao](matriz%20de%20confusao.jpg)
   
 
 ### Curvas ROC e Precision-Recall  
