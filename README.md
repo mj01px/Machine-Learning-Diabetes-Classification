@@ -42,21 +42,6 @@ O objetivo é mostrar como a escolha da validação cruzada pode impactar o dese
 
 📍 Recomendado rodar no **Google Colab** (ambiente já pronto).  
 
-### Instalação Local  
-```bash
-# Clonar este repositório
-git clone https://github.com/seu-usuario/pima-diabetes-ml.git
-cd pima-diabetes-ml
-
-# Criar ambiente virtual (opcional)
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-# Instalar dependências
-pip install -r requirements.txt
-```
-
 ### Requirements  
 ```
 pandas
@@ -77,7 +62,6 @@ matplotlib
 ### Matriz de Confusão  
 ![matriz de confusao](matriz%20de%20confusao.jpg)
   
-
 ### Curvas ROC e Precision-Recall  
 Comparação entre **SVM Linear (KFold=10)** e **SVM RBF (StratifiedKFold=3)**:  
 
@@ -89,13 +73,6 @@ Comparação entre **SVM Linear (KFold=10)** e **SVM RBF (StratifiedKFold=3)**:
 ## 🛠️ Ferramentas Utilizadas  
 - **Linguagem:** Python 3  
 - **Bibliotecas:** pandas, numpy, scikit-learn, matplotlib  
-
----
-
-## 🚀 Como Rodar  
-1. Clone o repositório  
-2. Instale as dependências  
-3. Execute o notebook no **Jupyter** ou **Google Colab**  
 
 ---
 
