@@ -1,79 +1,94 @@
-# 🩺 Pima Indians Diabetes — Machine Learning Notebook
+# Pima Indians Diabetes Prediction
 
-## 📌 Descrição do Projeto  
-Este projeto desenvolve um modelo de Machine Learning para prever a presença de diabetes em pacientes, utilizando o dataset **Pima Indians Diabetes Database**.  
-
-O classificador principal é o **Support Vector Machine (SVM)**, com foco em:  
-- **Otimização de hiperparâmetros via GridSearchCV**  
-- **Comparação entre KFold (10) e StratifiedKFold (3)**  
-
-O objetivo é mostrar como a escolha da validação cruzada pode impactar o desempenho, especialmente em datasets **desbalanceados**, garantindo estimativas mais confiáveis e um modelo final mais robusto.  
+A Machine Learning project developed to analyze and predict diabetes cases among Pima Indian women, using clinical and biometric data from a public dataset.
 
 ---
 
-## ⚙️ Metodologia  
+## Overview
 
-✔️ **Carga e Divisão dos Dados**  
-- Dataset dividido em **80% treino / 20% teste**, de forma estratificada.  
+This project explores how different **cross-validation strategies** and **model choices** affect predictive performance in medical datasets — focusing mainly on **Support Vector Machine (SVM)** and **Random Forest** classifiers.
 
-✔️ **Pipeline de Pré-processamento**  
-- Imputação de valores ausentes com `SimpleImputer` (mediana).  
-- Padronização das features com `StandardScaler`.  
-
-✔️ **Otimização com GridSearchCV**  
-- Busca exaustiva pelos melhores hiperparâmetros (kernel, C, gamma).  
-- Comparação entre:  
-  - **KFold (10)** → validação padrão  
-  - **StratifiedKFold (3)** → mantém proporção de classes em cada fold  
-
-✔️ **Treinamento e Avaliação**  
-- Melhor configuração encontrada:  
-  ```python
-  {'clf__kernel': 'rbf', 'clf__C': 10, 'clf__gamma': 0.01}
-  ```  
-- Avaliação com métricas como **acurácia, matriz de confusão, precisão, recall e F1-score**.  
-
-✔️ **Visualização**  
-- Fronteira de decisão gerada a partir de duas features relevantes (**Glucose** e **BMI**), destacando os vetores de suporte.  
+The main goal is to understand how model validation, feature importance, and feature engineering can influence accuracy, recall, and model generalization in health-related prediction tasks.
 
 ---
 
-## 🔧 Pré-requisitos  
+## Objectives
 
-📍 Recomendado rodar no **Google Colab** (ambiente já pronto).  
-
-### Requirements  
-```
-pandas
-numpy
-scikit-learn
-matplotlib
-```
+- Compare **KFold** vs **StratifiedKFold** cross-validation strategies  
+- Evaluate model performance on key metrics (Accuracy, F1, Recall, ROC-AUC)  
+- Identify **most relevant clinical variables** for diabetes diagnosis  
+- Build a **reproducible pipeline** for future experiments  
 
 ---
 
-## 📊 Resultados  
+## Dataset
 
-- Melhor configuração: `rbf, C=10, gamma=0.01`  
-- Acurácia no teste: **~75,32%**  
-- Bom equilíbrio entre **precisão e recall**  
-- Recall da classe **diabético** é destaque (importância clínica).  
+**Source:** [Pima Indians Diabetes Database (Kaggle)](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database)
 
-### Matriz de Confusão  
-![matriz de confusao](matriz%20de%20confusao.jpg)
-  
-### Curvas ROC e Precision-Recall  
-Comparação entre **SVM Linear (KFold=10)** e **SVM RBF (StratifiedKFold=3)**:  
-
-- **ROC AUC:** 0.83 (ambos)  
-- **AP (Precision-Recall):** RBF levemente superior (0.72 vs 0.71)  
-
----
-
-## 🛠️ Ferramentas Utilizadas  
-- **Linguagem:** Python 3  
-- **Bibliotecas:** pandas, numpy, scikit-learn, matplotlib  
+**Features:**
+- Pregnancies  
+- Glucose  
+- BloodPressure  
+- SkinThickness  
+- Insulin  
+- BMI  
+- DiabetesPedigreeFunction  
+- Age  
+- Outcome → 1 = Diabetic, 0 = Non-Diabetic  
 
 ---
 
-📌 Projeto feito para estudo de **Machine Learning aplicado a dados biomédicos**.  
+## Technologies
+
+- Python 3.10+  
+- pandas, numpy  
+- scikit-learn  
+- matplotlib, seaborn  
+- jupyter notebook  
+
+---
+
+## Methodology
+
+1. **Data Preprocessing**
+   - Missing value imputation (median/mode)
+   - Standardization with `StandardScaler`
+   - Label encoding for categorical values  
+
+2. **Modeling & Validation**
+   - Models tested:
+     - `SVC()`
+     - `RandomForestClassifier()`
+   - Validation strategies:
+     - `KFold(n_splits=10)`
+     - `StratifiedKFold(n_splits=3)`
+
+3. **Evaluation Metrics**
+   - Accuracy  
+   - Recall  
+   - F1-Score  
+   - ROC-AUC  
+   - Confusion Matrix  
+
+---
+
+## Key Results
+
+| Comparison | Mean Accuracy | Validation Method |
+|-------------|----------------|-------------------|
+| SVM (KFold-10) | **≈ 75.3%** | KFold (10 folds) |
+| SVM (StratifiedKFold-3) | **≈ 72.0%** | StratifiedKFold (3 folds) |
+
+- **Performance difference:** ~3.2%  
+- **Most important features:** `Glucose`, `BMI`, and `Age`  
+- Some derived features had **neutral or slightly negative** effect on model accuracy.
+
+---
+
+## Insights
+
+- Cross-validation choice **directly affects model reliability**, especially with unbalanced datasets.  
+- In clinical contexts, **Recall** is more critical than Accuracy — missing a diabetic case (false negative) is worse than a false alert.  
+- Feature engineering should be **guided by domain knowledge**, not only by statistical correlation.
+
+---
