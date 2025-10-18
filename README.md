@@ -101,9 +101,8 @@ The **goal** is to predict whether a patient shows signs of diabetes (binary cla
 
 ## Author
 
-**Mauro Junior**  
-Software Engineering Student 
-🔗 [LinkedIn](https://linkedin.com/in/mauroapjunior) | 💻 [GitHub](https://github.com/mj01px)
+**Mauro Junior**, **Julio Franz**, **Pablo Souza**, **Victor Teixeira**, **Matheus Herique**, **Fabiano Menegidio**  
+🔗 [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7379939858934476800/) 
 
 <img width="757" height="932" alt="poster" src="https://github.com/user-attachments/assets/fbf4fb6f-0b20-4c5d-a7d3-1f5cd8b62220" />
 
