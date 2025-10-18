@@ -3,9 +3,6 @@
 A machine learning notebook developed to **analyze and predict diabetes** among Pima Indian women using clinical and biometric data.  
 This version focuses on the **Support Vector Machine (SVM)** model — exploring how kernel choice, regularization, and validation strategy affect performance.
 
-
-<img width="757" height="932" alt="poster" src="https://github.com/user-attachments/assets/fbf4fb6f-0b20-4c5d-a7d3-1f5cd8b62220" />
-
 ---
 
 ## Overview
@@ -107,3 +104,6 @@ The **goal** is to predict whether a patient shows signs of diabetes (binary cla
 **Mauro Junior**  
 Software Engineering Student 
 🔗 [LinkedIn](https://linkedin.com/in/mauroapjunior) | 💻 [GitHub](https://github.com/mj01px)
+
+<img width="757" height="932" alt="poster" src="https://github.com/user-attachments/assets/fbf4fb6f-0b20-4c5d-a7d3-1f5cd8b62220" />
+
