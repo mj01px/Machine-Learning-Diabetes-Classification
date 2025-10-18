@@ -1,23 +1,29 @@
-# Pima Indians Diabetes Prediction
+# Pima Indians Diabetes Prediction — SVM Classifier
 
-A Machine Learning project developed to analyze and predict diabetes cases among Pima Indian women, using clinical and biometric data from a public dataset.
+A machine learning notebook developed to **analyze and predict diabetes** among Pima Indian women using clinical and biometric data.  
+This version focuses on the **Support Vector Machine (SVM)** model — exploring how kernel choice, regularization, and validation strategy affect performance.
 
 ---
 
 ## Overview
 
-This project explores how different **cross-validation strategies** and **model choices** affect predictive performance in medical datasets — focusing mainly on **Support Vector Machine (SVM)** and **Random Forest** classifiers.
+This project demonstrates a **complete ML workflow**:
+- Data preprocessing with **imputation** and **scaling**
+- Hyperparameter tuning using **GridSearchCV**
+- Model evaluation using multiple **cross-validation strategies**
+- Visualization and performance reporting for reproducibility
 
-The main goal is to understand how model validation, feature importance, and feature engineering can influence accuracy, recall, and model generalization in health-related prediction tasks.
+The notebook is fully compatible with **Google Colab** and designed to be **modular, readable, and extendable** for future experiments (e.g. Random Forest, Logistic Regression, or Neural Networks).
 
 ---
 
 ## Objectives
 
-- Compare **KFold** vs **StratifiedKFold** cross-validation strategies  
-- Evaluate model performance on key metrics (Accuracy, F1, Recall, ROC-AUC)  
-- Identify **most relevant clinical variables** for diabetes diagnosis  
-- Build a **reproducible pipeline** for future experiments  
+- Compare **KFold** vs **StratifiedKFold** cross-validation on SVM models  
+- Evaluate kernel effects: `linear`, `rbf`, `poly`, and `sigmoid`  
+- Optimize hyperparameters **C** and **gamma** via grid search  
+- Measure generalization through **F1**, **Recall**, and **Precision**  
+- Build a **reproducible and exportable pipeline**  
 
 ---
 
@@ -25,70 +31,76 @@ The main goal is to understand how model validation, feature importance, and fea
 
 **Source:** [Pima Indians Diabetes Database (Kaggle)](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database)
 
-**Features:**
-- Pregnancies  
-- Glucose  
-- BloodPressure  
-- SkinThickness  
-- Insulin  
-- BMI  
-- DiabetesPedigreeFunction  
-- Age  
-- Outcome → 1 = Diabetic, 0 = Non-Diabetic  
-
----
-
-## Technologies
-
-- Python 3.10+  
-- pandas, numpy  
-- scikit-learn  
-- matplotlib, seaborn  
-- jupyter notebook  
+**Description:**  
+The dataset contains diagnostic measurements from 768 female patients of Pima Indian heritage — all aged 21 or older.  
+The **goal** is to predict whether a patient shows signs of diabetes (binary classification).
 
 ---
 
 ## Methodology
 
-1. **Data Preprocessing**
-   - Missing value imputation (median/mode)
-   - Standardization with `StandardScaler`
-   - Label encoding for categorical values  
+### 1. Data Preprocessing
+- **Imputation:** Missing or zero values replaced using the *median*.
+- **Standardization:** `StandardScaler()` applied to normalize feature ranges.
+- **Balanced weighting:** `class_weight="balanced"` used to handle class imbalance.
 
-2. **Modeling & Validation**
-   - Models tested:
-     - `SVC()`
-     - `RandomForestClassifier()`
-   - Validation strategies:
-     - `KFold(n_splits=10)`
-     - `StratifiedKFold(n_splits=3)`
+### 2. Modeling
+- Core model: **`sklearn.svm.SVC()`**
+- Hyperparameter tuning:
+  - `C`: regularization strength
+  - `gamma`: kernel coefficient (for RBF)
+  - `kernel`: `linear`, `rbf`, `poly`, `sigmoid`
 
-3. **Evaluation Metrics**
-   - Accuracy  
-   - Recall  
-   - F1-Score  
-   - ROC-AUC  
-   - Confusion Matrix  
+### 3. Cross-Validation
+- `KFold(n_splits=10)` — general performance
+- `StratifiedKFold(n_splits=3)` — preserves label ratio for medical fairness
 
----
+### 4. Metrics
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1-score**
+- **Confusion Matrix**
+- Optional: **ROC-AUC** and **Precision-Recall Curves**
 
-## Key Results
-
-| Comparison | Mean Accuracy | Validation Method |
-|-------------|----------------|-------------------|
-| SVM (KFold-10) | **≈ 75.3%** | KFold (10 folds) |
-| SVM (StratifiedKFold-3) | **≈ 72.0%** | StratifiedKFold (3 folds) |
-
-- **Performance difference:** ~3.2%  
-- **Most important features:** `Glucose`, `BMI`, and `Age`  
-- Some derived features had **neutral or slightly negative** effect on model accuracy.
+### 5. Reporting
+- Automatic creation of a **DataFrame** from the classification report for cleaner visualization.
+- Artifacts (`.joblib`) saved for model reuse or deployment.
 
 ---
 
-## Insights
+##  Results Summary
 
-- Cross-validation choice **directly affects model reliability**, especially with unbalanced datasets.  
-- In clinical contexts, **Recall** is more critical than Accuracy — missing a diabetic case (false negative) is worse than a false alert.  
-- Feature engineering should be **guided by domain knowledge**, not only by statistical correlation.
+| Model / CV | Kernel | Accuracy | F1 | Recall | CV Type |
+|-------------|---------|-----------|------|----------|----------|
+| SVM | RBF | ≈ 75.3% | 0.74 | 0.72 | KFold(10) |
+| SVM | RBF | ≈ 72.0% | 0.71 | 0.68 | StratifiedKFold(3) |
+| Fixed RBF (C=10, γ=0.01) | RBF | ≈ 76.4% | 0.75 | 0.73 | Hold-out |
+
+**Top Predictive Features:**  
+`Glucose`, `BMI`, and `Age` consistently contribute most to correct predictions.
 
 ---
+
+##  Insights
+
+- **Cross-validation choice matters:** Stratified folds are crucial in unbalanced medical data.  
+- **Kernel selection:** RBF outperformed others, balancing bias and variance effectively.  
+- **Model interpretability:** Although SVMs aren’t inherently explainable, scaling and feature analysis still reveal strong medical correlations.  
+- **Clinical relevance:** In healthcare, **Recall > Accuracy** — missing diabetic cases (false negatives) is more harmful than false positives.
+
+---
+
+## Tech Stack
+
+- **Language:** Python 3.10+  
+- **Libraries:** `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `joblib`, `seaborn`  
+- **Environment:** Google Colab / Jupyter Notebook  
+
+---
+
+## Author
+
+**Mauro Junior**  
+Software Engineering Student 
+🔗 [LinkedIn](https://linkedin.com/in/mauroapjunior) | 💻 [GitHub](https://github.com/mj01px)
